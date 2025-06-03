@@ -1,22 +1,7 @@
+import pickle
+
 import pandas as pd
 import streamlit as st
-from sklearn.ensemble import RandomForestRegressor
-
-df = pd.read_csv('players.csv')
-dataset = df.dropna(subset=['Sell value (€)'])
-
-x_variables = ['Corners', 'Crossing', 'Dribbling', 'Finishing', 'First Touch', 'Free Kick Taking', 'Heading',
-               'Long Shots', 'Long Throws', 'Marking', 'Passing', 'Penalty Taking', 'Tackling', 'Technique',
-               'Aggression', 'Anticipation', 'Bravery', 'Composure', 'Concentration', 'Decisions', 'Determination',
-               'Flair', 'Leadership', 'Off the Ball', 'Positioning', 'Teamwork', 'Vision', 'Work Rate',
-               'Acceleration', 'Agility', 'Balance', 'Jumping Reach', 'Natural Fitness','Pace', 'Stamina', 'Strength',
-               'Age', 'Contract Expiring']
-
-X = dataset[x_variables]
-y = dataset['Sell value (€)']
-
-model = RandomForestRegressor(random_state=418)
-model.fit(X, y)
 
 st.sidebar.header('Filter')
 
@@ -55,10 +40,14 @@ for attribute in attribute_dict:
 input_dict['Age'] = float(age[0])
 input_dict['Contract Expiring'] = 1 if expiring_contract else 0
 
+with open('model.pkl', 'rb') as f:
+    model = pickle.load(f)
+
 input_df = pd.DataFrame(input_dict, index=[0])
 predicted_price = model.predict(input_df)
 
-player_selection = df
+players = pd.read_csv('players.csv')
+player_selection = players
 if position is not None:
     player_selection = player_selection.query(f'{position} == 1')
 for attribute in attribute_dict:
