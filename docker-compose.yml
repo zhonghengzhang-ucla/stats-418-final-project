@@ -4,4 +4,4 @@ services:
     volumes:
      - .:/server
     ports:
-     - "8501:8501"
+     - 5001:5001

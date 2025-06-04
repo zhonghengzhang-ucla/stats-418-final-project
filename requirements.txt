@@ -1,5 +1,5 @@
 scikit-learn
 pandas
-streamlit
+flask
 scipy
 numpy

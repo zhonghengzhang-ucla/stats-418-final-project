@@ -2,6 +2,7 @@ import pickle
 
 import pandas as pd
 import streamlit as st
+import requests
 
 st.sidebar.header('Filter')
 
@@ -33,18 +34,14 @@ for attribute in attribute_list:
     else:
         attribute_dict[attribute] = [1, 20]
 
-
 input_dict = {}
 for attribute in attribute_dict:
     input_dict[attribute] = float(attribute_dict[attribute][0])
 input_dict['Age'] = float(age[0])
 input_dict['Contract Expiring'] = 1 if expiring_contract else 0
 
-with open('model.pkl', 'rb') as f:
-    model = pickle.load(f)
-
-input_df = pd.DataFrame(input_dict, index=[0])
-predicted_price = model.predict(input_df)
+response = requests.post('https://stats-418-final-project-1088042122942.us-west1.run.app/pricer', json=input_dict, headers = {"content-type":"application/json"})
+predicted_price = list(response.json().values())[0]
 
 players = pd.read_csv('players.csv')
 player_selection = players
