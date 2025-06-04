@@ -57,7 +57,7 @@ if expiring_contract:
 
 st.title('Football Manager 2023 Player Pricer & Recommender')
 st.header('Projected Sell Value for Youngest Minimum Viable Player')
-st.write(f'Predicted sell value: €{predicted_price[0]:,.0f}')
+st.write(f'Predicted sell value: €{predicted_price:,.0f}')
 
 st.header('Recommended Players')
 if player_selection.shape[0] == 0:
