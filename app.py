@@ -50,15 +50,16 @@ players = pd.read_csv('players.csv')
 player_selection = players
 if position is not None:
     player_selection = player_selection.query(f'{position} == 1')
-for attribute in attribute_dict:
+for attribute in attributes:
     player_selection = player_selection.query(f'`{attribute}` >= {attribute_dict[attribute][0]}')
     player_selection = player_selection.query(f'`{attribute}` <= {attribute_dict[attribute][1]}')
-player_selection = player_selection.query(f'Age >= {age[0]}')
-player_selection = player_selection.query(f'Age <= {age[1]}')
+if add_age:
+    player_selection = player_selection.query(f'Age >= {age[0]}')
+    player_selection = player_selection.query(f'Age <= {age[1]}')
 if expiring_contract:
     player_selection = player_selection.query('`Contract Expiring` == 1')
 
-st.title('Football Manager 23 Player Pricer & Recommender')
+st.title('Football Manager 2023 Player Pricer & Recommender')
 st.header('Projected Sell Value for Youngest Minimum Viable Player')
 st.write(f'Predicted sell value: €{predicted_price[0]:,.0f}')
 
