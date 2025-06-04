@@ -2,7 +2,7 @@ from model import predict
 from flask import Flask, jsonify, request
 import json
 
-# HEADERS = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+HEADERS = {'Content-type': 'application/json', 'Accept': 'text/plain'}
 
 def flask_app():
     app = Flask(__name__)
