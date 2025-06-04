@@ -9,7 +9,7 @@ def flask_app():
 
     @app.route('/', methods=['GET'])
     def server_is_up():
-            return 'api is running\n'
+        return 'api is running\n'
 
     @app.route('/pricer', methods=['POST'])
     def start():

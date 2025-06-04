@@ -38,7 +38,7 @@ for attribute in attribute_dict:
 input_dict['Age'] = float(age[0])
 input_dict['Contract Expiring'] = 1.0 if expiring_contract else 0.0
 
-response = requests.post('https://stats-418-final-project-1088042122942.us-west1.run.app/pricer', json=input_dict, headers = {"content-type":"application/json"})
+response = requests.post('https://stats-418-final-project-app-1088042122942.us-central1.run.app/pricer', json=input_dict, headers = {"content-type":"application/json"})
 prediction = response.json()
 predicted_price = list(prediction.values())[0]
 
