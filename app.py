@@ -36,9 +36,9 @@ for attribute in attribute_list:
 
 input_dict = {}
 for attribute in attribute_dict:
-    input_dict[attribute] = float(attribute_dict[attribute][0])
-input_dict['Age'] = float(age[0])
-input_dict['Contract Expiring'] = 1 if expiring_contract else 0
+    input_dict[attribute] = str(attribute_dict[attribute][0])
+input_dict['Age'] = str(age[0])
+input_dict['Contract Expiring'] = '1' if expiring_contract else '0'
 
 response = requests.post('https://stats-418-final-project-1088042122942.us-west1.run.app/pricer', json=input_dict, headers = {"content-type":"application/json"})
 predicted_price = list(response.json().values())[0]
