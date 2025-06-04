@@ -7,6 +7,10 @@ HEADERS = {'Content-type': 'application/json', 'Accept': 'text/plain'}
 def flask_app():
     app = Flask(__name__)
 
+    @app.route('/', methods=['GET'])
+    def server_is_up():
+            return 'api is running\n'
+
     @app.route('/pricer', methods=['POST'])
     def start():
         to_predict = request.json
